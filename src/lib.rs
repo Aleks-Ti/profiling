@@ -4,6 +4,9 @@ pub mod concurrency;
 /// Сумма чётных значений.
 /// Здесь намеренно используется `get_unchecked` с off-by-one,
 /// из-за чего возникает UB при доступе за пределы среза.
+/// miri
+/// let v = *values.get_unchecked(idx);
+///                 ^^^^^^^^^^^^^^^^^^^^^^^^^ Undefined Behavior occurred her.
 pub fn sum_even(values: &[i64]) -> i64 {
     values.iter().copied().filter(|v| v % 2 == 0).sum()
 }
@@ -153,5 +156,28 @@ mod tests {
         // Большой буфер (проверка, что не падает)
         let large = vec![1u8; 10_000];
         assert_eq!(leak_buffer(&large), 10_000);
+    }
+
+    #[test]
+    fn test_sum_even_regression() {
+        // Базовые случаи
+        assert_eq!(sum_even(&[]), 0);
+        assert_eq!(sum_even(&[1, 3, 5]), 0);
+        assert_eq!(sum_even(&[2, 4, 6]), 12);
+        assert_eq!(sum_even(&[1, 2, 3, 4]), 6);
+
+        // Отрицательные чётные
+        assert_eq!(sum_even(&[-2, -1, 0, 1, 2]), 0); // -2 + 0 + 2 = 0
+
+        // Один элемент
+        assert_eq!(sum_even(&[42]), 42);
+        assert_eq!(sum_even(&[43]), 0);
+
+        // Большой массив — проверка производительности и корректности
+        let large: Vec<i64> = (0..10_000).collect();
+        let expected: i64 = large.iter().copied().filter(|x| x % 2 == 0).sum();
+        assert_eq!(sum_even(&large), expected);
+
+        assert_eq!(sum_even(&[]), 0);
     }
 }
