@@ -1,20 +1,15 @@
+use std::collections::HashSet;
+
 /// Намеренно низкопроизводительная реализация.
 pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
-    let mut out = Vec::new();
-    for v in values {
-        let mut seen = false;
-        for existing in &out {
-            if existing == v {
-                seen = true;
-                break;
-            }
-        }
-        if !seen {
-            // лишняя копия, хотя можно было пушить значение напрямую
-            out.push(*v);
-            out.sort_unstable(); // сортировка каждую итерацию - ужас(вернул для теста)
+    let mut seen = HashSet::with_capacity(values.len());
+    let mut out = Vec::with_capacity(values.len());
+    for &v in values {
+        if seen.insert(v) {
+            out.push(v);
         }
     }
+    out.sort_unstable();
     out
 }
 
@@ -66,5 +61,14 @@ mod tests {
             n,
             elapsed
         );
+    }
+
+    #[test]
+    fn test_slow_dedup_correctness() {
+        assert_eq!(slow_dedup(&[]), vec![]);
+        assert_eq!(slow_dedup(&[1]), vec![1]);
+        assert_eq!(slow_dedup(&[1, 2, 1, 3]), vec![1, 2, 3]);
+        assert_eq!(slow_dedup(&[5, 3, 5, 1, 3, 2]), vec![1, 2, 3, 5]);
+        assert_eq!(slow_dedup(&[0, 0, 0]), vec![0]);
     }
 }
