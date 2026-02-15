@@ -30,7 +30,11 @@ pub fn leak_buffer(input: &[u8]) -> usize {
 /// Небрежная нормализация строки: удаляем пробелы и приводим к нижнему регистру,
 /// но игнорируем повторяющиеся пробелы/табуляции внутри текста.
 pub fn normalize(input: &str) -> String {
-    input.replace(' ', "").to_lowercase()
+    let mut result = String::new();
+    for word in input.split_whitespace() {
+        result.push_str(word);
+    }
+    result.to_lowercase()
 }
 
 /// Логическая ошибка: усредняет по всем элементам, хотя требуется учитывать
@@ -93,5 +97,35 @@ mod tests {
         // Убедимся, что НОЛЬ не учитывается как положительное число
         assert_eq!(average_positive(&[0, 0, 0]), 0.0);
         assert_eq!(average_positive(&[0, 1, 0]), 1.0); // только 1 учитывается
+    }
+
+    #[test]
+    fn test_normalize_regression() {
+        // Базовый случай
+        assert_eq!(normalize("Hello World"), "helloworld");
+
+        // Множество пробелов → один
+        assert_eq!(normalize("Hello     World"), "helloworld");
+
+        // Табуляции и переносы
+        assert_eq!(normalize("Hello\t\n\rWorld"), "helloworld");
+
+        // Смешанные whitespace
+        assert_eq!(normalize("  Hello \t \n World  "), "helloworld");
+
+        // Только whitespace → пустая строка
+        assert_eq!(normalize(" \t\n\r "), "");
+
+        // Пустая строка
+        assert_eq!(normalize(""), "");
+
+        // Unicode whitespace (неразрывный пробел U+00A0)
+        assert_eq!(normalize("Hello\u{00A0}World"), "helloworld");
+
+        // Регистр
+        assert_eq!(normalize("HELLO WoRLd"), "helloworld");
+        assert_eq!(normalize("  Rust  "), "rust");
+        assert_eq!(normalize("a\tb"), "ab");
+        assert_eq!(normalize("a  \t  b"), "ab");
     }
 }
