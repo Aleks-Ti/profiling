@@ -1,0 +1,404 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 242  of event 'cpu-clock:pppH'
+# Event count (approx.): 60500000
+#
+# Children      Self  Command  Shared Object         Symbol                             
+# ........  ........  .......  ....................  ...................................
+#
+    94.21%    90.91%  demo     demo                  [.] broken_app::algo::slow_fib
+            |
+            ---broken_app::algo::slow_fib
+               |          
+                --3.31%--asm_sysvec_apic_timer_interrupt
+                          sysvec_apic_timer_interrupt
+                          irq_exit_rcu
+                          handle_softirqs
+                          |          
+                           --2.07%--run_timer_softirq
+                                     __run_timers.part.0
+                                     |          
+                                      --1.65%--call_timer_fn
+                                                |          
+                                                 --1.24%--vbg_heartbeat_timer
+                                                           vbg_req_perform
+
+     4.13%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857e297
+            |
+            ---0x7fee8857e297
+               0x7fee8857f597
+               |          
+               |--2.89%--0x7fee8857d7f2
+               |          |          
+               |           --0.83%--0x7fee8857772b
+               |          
+                --1.24%--0x7fee8857d83b
+
+     4.13%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857f597
+            |
+            ---0x7fee8857f597
+               |          
+               |--2.89%--0x7fee8857d7f2
+               |          |          
+               |           --0.83%--0x7fee8857772b
+               |          
+                --1.24%--0x7fee8857d83b
+
+     3.31%     0.00%  demo     [kernel.kallsyms]     [k] asm_sysvec_apic_timer_interrupt
+            |
+            ---asm_sysvec_apic_timer_interrupt
+               sysvec_apic_timer_interrupt
+               irq_exit_rcu
+               handle_softirqs
+               |          
+                --2.07%--run_timer_softirq
+                          __run_timers.part.0
+                          |          
+                           --1.65%--call_timer_fn
+                                     |          
+                                      --1.24%--vbg_heartbeat_timer
+                                                vbg_req_perform
+
+     3.31%     0.00%  demo     [kernel.kallsyms]     [k] sysvec_apic_timer_interrupt
+            |
+            ---sysvec_apic_timer_interrupt
+               irq_exit_rcu
+               handle_softirqs
+               |          
+                --2.07%--run_timer_softirq
+                          __run_timers.part.0
+                          |          
+                           --1.65%--call_timer_fn
+                                     |          
+                                      --1.24%--vbg_heartbeat_timer
+                                                vbg_req_perform
+
+     3.31%     0.00%  demo     [kernel.kallsyms]     [k] irq_exit_rcu
+            |
+            ---irq_exit_rcu
+               handle_softirqs
+               |          
+                --2.07%--run_timer_softirq
+                          __run_timers.part.0
+                          |          
+                           --1.65%--call_timer_fn
+                                     |          
+                                      --1.24%--vbg_heartbeat_timer
+                                                vbg_req_perform
+
+     3.31%     1.24%  demo     [kernel.kallsyms]     [k] handle_softirqs
+            |          
+            |--2.07%--handle_softirqs
+            |          run_timer_softirq
+            |          __run_timers.part.0
+            |          |          
+            |           --1.65%--call_timer_fn
+            |                     |          
+            |                      --1.24%--vbg_heartbeat_timer
+            |                                vbg_req_perform
+            |          
+             --1.24%--broken_app::algo::slow_fib
+                       asm_sysvec_apic_timer_interrupt
+                       sysvec_apic_timer_interrupt
+                       irq_exit_rcu
+                       handle_softirqs
+
+     2.89%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857d7f2
+            |
+            ---0x7fee8857d7f2
+               |          
+                --0.83%--0x7fee8857772b
+
+     2.07%     0.41%  demo     [kernel.kallsyms]     [k] __run_timers.part.0
+            |          
+             --1.65%--__run_timers.part.0
+                       call_timer_fn
+                       |          
+                        --1.24%--vbg_heartbeat_timer
+                                  vbg_req_perform
+
+     2.07%     0.00%  demo     [kernel.kallsyms]     [k] run_timer_softirq
+            |
+            ---run_timer_softirq
+               __run_timers.part.0
+               |          
+                --1.65%--call_timer_fn
+                          |          
+                           --1.24%--vbg_heartbeat_timer
+                                     vbg_req_perform
+
+     1.65%     0.00%  demo     [kernel.kallsyms]     [k] entry_SYSCALL_64_after_hwframe
+            |
+            ---entry_SYSCALL_64_after_hwframe
+               do_syscall_64
+               x64_sys_call
+               |          
+               |--0.83%--__x64_sys_execve
+               |          do_execveat_common.isra.0
+               |          bprm_execve
+               |          bprm_execve.part.0
+               |          exec_binprm
+               |          search_binary_handler
+               |          load_elf_binary
+               |          
+                --0.83%--__x64_sys_mmap
+                          ksys_mmap_pgoff
+                          vm_mmap_pgoff
+
+     1.65%     0.00%  demo     [kernel.kallsyms]     [k] do_syscall_64
+            |
+            ---do_syscall_64
+               x64_sys_call
+               |          
+               |--0.83%--__x64_sys_execve
+               |          do_execveat_common.isra.0
+               |          bprm_execve
+               |          bprm_execve.part.0
+               |          exec_binprm
+               |          search_binary_handler
+               |          load_elf_binary
+               |          
+                --0.83%--__x64_sys_mmap
+                          ksys_mmap_pgoff
+                          vm_mmap_pgoff
+
+     1.65%     0.00%  demo     [kernel.kallsyms]     [k] x64_sys_call
+            |
+            ---x64_sys_call
+               |          
+               |--0.83%--__x64_sys_execve
+               |          do_execveat_common.isra.0
+               |          bprm_execve
+               |          bprm_execve.part.0
+               |          exec_binprm
+               |          search_binary_handler
+               |          load_elf_binary
+               |          
+                --0.83%--__x64_sys_mmap
+                          ksys_mmap_pgoff
+                          vm_mmap_pgoff
+
+     1.65%     0.00%  demo     [kernel.kallsyms]     [k] call_timer_fn
+            |
+            ---call_timer_fn
+               |          
+                --1.24%--vbg_heartbeat_timer
+                          vbg_req_perform
+
+     1.24%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857d83b
+            |
+            ---0x7fee8857d83b
+
+     1.24%     0.00%  demo     [kernel.kallsyms]     [k] vm_mmap_pgoff
+            |
+            ---vm_mmap_pgoff
+               |          
+                --0.83%--do_mmap
+                          mmap_region
+                          __mmap_region
+
+     1.24%     1.24%  demo     [vboxguest]           [k] vbg_req_perform
+            |
+            ---broken_app::algo::slow_fib
+               asm_sysvec_apic_timer_interrupt
+               sysvec_apic_timer_interrupt
+               irq_exit_rcu
+               handle_softirqs
+               run_timer_softirq
+               __run_timers.part.0
+               call_timer_fn
+               vbg_heartbeat_timer
+               vbg_req_perform
+
+     1.24%     0.00%  demo     [vboxguest]           [k] vbg_heartbeat_timer
+            |
+            ---vbg_heartbeat_timer
+               vbg_req_perform
+
+     0.83%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88584cb7
+            |
+            ---0x7fee88584cb7
+               entry_SYSCALL_64_after_hwframe
+               do_syscall_64
+               x64_sys_call
+               __x64_sys_mmap
+               ksys_mmap_pgoff
+               vm_mmap_pgoff
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] __x64_sys_execve
+            |
+            ---__x64_sys_execve
+               do_execveat_common.isra.0
+               bprm_execve
+               bprm_execve.part.0
+               exec_binprm
+               search_binary_handler
+               load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] do_execveat_common.isra.0
+            |
+            ---do_execveat_common.isra.0
+               bprm_execve
+               bprm_execve.part.0
+               exec_binprm
+               search_binary_handler
+               load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] __x64_sys_mmap
+            |
+            ---__x64_sys_mmap
+               ksys_mmap_pgoff
+               vm_mmap_pgoff
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] bprm_execve
+            |
+            ---bprm_execve
+               bprm_execve.part.0
+               exec_binprm
+               search_binary_handler
+               load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] bprm_execve.part.0
+            |
+            ---bprm_execve.part.0
+               exec_binprm
+               search_binary_handler
+               load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] ksys_mmap_pgoff
+            |
+            ---ksys_mmap_pgoff
+               vm_mmap_pgoff
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] exec_binprm
+            |
+            ---exec_binprm
+               search_binary_handler
+               load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] do_mmap
+            |
+            ---do_mmap
+               mmap_region
+               __mmap_region
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] search_binary_handler
+            |
+            ---search_binary_handler
+               load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] load_elf_binary
+            |
+            ---load_elf_binary
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] mmap_region
+            |
+            ---mmap_region
+               __mmap_region
+
+     0.83%     0.00%  demo     [kernel.kallsyms]     [k] __mmap_region
+            |
+            ---__mmap_region
+
+     0.83%     0.83%  demo     ld-linux-x86-64.so.2  [.] 0x0000000000018408
+            |
+            ---0x7fee8857e297
+               0x7fee8857f597
+               0x7fee8857d7f2
+
+     0.83%     0.83%  demo     libgcc_s.so.1         [.] __cpu_indicator_init
+            |
+            ---0x7fee8857e2c9
+               0x7fee88564567
+               0x7fee8856447d
+               __cpu_indicator_init
+
+     0.83%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857e2c9
+            |
+            ---0x7fee8857e2c9
+               0x7fee88564567
+               0x7fee8856447d
+               __cpu_indicator_init
+
+     0.83%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88564567
+            |
+            ---0x7fee88564567
+               0x7fee8856447d
+               __cpu_indicator_init
+
+     0.83%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8856447d
+            |
+            ---0x7fee8856447d
+               __cpu_indicator_init
+
+     0.83%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857772b
+            |
+            ---0x7fee8857772b
+
+     0.83%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88576408
+            |
+            ---0x7fee88576408
+
+     0.41%     0.41%  demo     [kernel.kallsyms]     [k] arch_local_irq_enable
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8858139f
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88561c7b
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] _dl_catch_exception
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88561494
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88568600
+     0.41%     0.41%  demo     [kernel.kallsyms]     [k] d_path
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88567098
+     0.41%     0.41%  demo     [kernel.kallsyms]     [k] next_uptodate_page
+     0.41%     0.41%  demo     [kernel.kallsyms]     [k] cap_mmap_file
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88582233
+     0.41%     0.41%  demo     [kernel.kallsyms]     [k] __lock_text_start
+     0.41%     0.41%  demo     [kernel.kallsyms]     [k] copy_user_generic_string
+     0.41%     0.00%  demo     libc.so.6             [.] __libc_early_init
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8858110e
+     0.41%     0.00%  demo     libc.so.6             [.] 0x00007fee8839f4e0
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] asm_exc_page_fault
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8856679e
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] elf_map
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] exc_page_fault
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8856b470
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] __do_munmap
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] do_user_addr_fault
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] vm_mmap
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] __split_vma
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] handle_mm_fault
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] __handle_mm_fault
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] vm_area_dup
+     0.41%     0.41%  demo     ld-linux-x86-64.so.2  [.] 0x0000000000018426
+     0.41%     0.41%  demo     ld-linux-x86-64.so.2  [.] 0x00000000000185f3
+     0.41%     0.41%  demo     ld-linux-x86-64.so.2  [.] 0x00000000000186a8
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] handle_pte_fault
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] kmem_cache_alloc
+     0.41%     0.41%  demo     ld-linux-x86-64.so.2  [.] 0x0000000000019733
+     0.41%     0.41%  demo     ld-linux-x86-64.so.2  [.] 0x000000000001a323
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] do_fault
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] obj_cgroup_charge
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] process_timeout
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] do_read_fault
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] obj_cgroup_charge_pages
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] perf_event_mmap
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] wake_up_process
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] create_elf_tables
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] filemap_map_pages
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] perf_event_mmap_event
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] try_charge_memcg
+     0.41%     0.00%  demo     [kernel.kallsyms]     [k] try_to_wake_up
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88578247
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857828f
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee8857829e
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88576426
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee885765f3
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee885766a8
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88577733
+     0.41%     0.00%  demo     ld-linux-x86-64.so.2  [.] 0x00007fee88578323
+
+
+#
+# (Cannot load tips.txt file, please install perf!)
+#

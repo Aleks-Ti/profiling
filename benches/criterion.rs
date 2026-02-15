@@ -3,7 +3,7 @@ use criterion::{BatchSize, Criterion, criterion_group, criterion_main};
 use std::time::Duration;
 
 fn bench_sum_even(c: &mut Criterion) {
-    let data: Vec<i64> = (0..50_000).collect();
+    let data: Vec<i64> = (0..500_000).collect();
     c.bench_function("sum_even_broken", |b| b.iter(|| sum_even(&data)));
 }
 
@@ -12,7 +12,7 @@ fn bench_fib(c: &mut Criterion) {
 }
 
 fn bench_dedup(c: &mut Criterion) {
-    let data: Vec<u64> = (0..5_000).flat_map(|n| [n, n]).collect();
+    let data: Vec<u64> = (0..10_000).flat_map(|n| [n, n]).collect();
     c.bench_function("slow_dedup_broken", |b| {
         b.iter_batched(
             || data.clone(),
@@ -24,12 +24,13 @@ fn bench_dedup(c: &mut Criterion) {
     });
 }
 
-criterion_group! {
-    name = benches;
-    config = Criterion::default()
-    .measurement_time(Duration::from_secs(5))
-    .warm_up_time(Duration::from_secs(2))
-    .sample_size(10);
-    targets = bench_sum_even, bench_fib, bench_dedup
-}
+// criterion_group! {
+//     name = benches;
+//     config = Criterion::default()
+//     .measurement_time(Duration::from_secs(5))
+//     .warm_up_time(Duration::from_secs(2))
+//     .sample_size(10);
+//     targets = bench_sum_even, bench_fib, bench_dedup
+// }
+criterion_group!(benches, bench_sum_even, bench_fib, bench_dedup);
 criterion_main!(benches);
