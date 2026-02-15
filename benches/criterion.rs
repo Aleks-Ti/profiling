@@ -1,5 +1,6 @@
 use broken_app::{algo, sum_even};
-use criterion::{criterion_group, criterion_main, BatchSize, Criterion};
+use criterion::{BatchSize, Criterion, criterion_group, criterion_main};
+use std::time::Duration;
 
 fn bench_sum_even(c: &mut Criterion) {
     let data: Vec<i64> = (0..50_000).collect();
@@ -23,5 +24,12 @@ fn bench_dedup(c: &mut Criterion) {
     });
 }
 
-criterion_group!(benches, bench_sum_even, bench_fib, bench_dedup);
+criterion_group! {
+    name = benches;
+    config = Criterion::default()
+    .measurement_time(Duration::from_secs(5))
+    .warm_up_time(Duration::from_secs(2))
+    .sample_size(10);
+    targets = bench_sum_even, bench_fib, bench_dedup
+}
 criterion_main!(benches);

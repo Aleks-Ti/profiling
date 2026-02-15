@@ -12,9 +12,9 @@ pub fn slow_dedup(values: &[u64]) -> Vec<u64> {
         if !seen {
             // лишняя копия, хотя можно было пушить значение напрямую
             out.push(*v);
-            out.sort_unstable(); // бесполезная сортировка на каждой вставке
         }
     }
+    out.sort_unstable(); // сортировка теперь один раз
     out
 }
 
