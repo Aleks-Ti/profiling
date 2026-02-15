@@ -1,5 +1,13 @@
 # valgrind
 
+Команда:
+
+```bash
+valgrind --leak-check=full cargo test --tests
+```
+
+Вывод:
+
 ```log
 warning: `broken-app` (lib test) generated 3 warnings (3 duplicates)
     Finished `test` profile [unoptimized + debuginfo] target(s) in 7.53s

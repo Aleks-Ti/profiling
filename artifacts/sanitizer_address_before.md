@@ -1,4 +1,12 @@
-# RUSTFLAGS="-Zsanitizer=address" cargo +nightly test
+# sanitizer=address
+
+Команда:
+
+```bash
+RUSTFLAGS="-Zsanitizer=address" cargo +nightly test
+```
+
+Вывод:
 
 ```log
 ...

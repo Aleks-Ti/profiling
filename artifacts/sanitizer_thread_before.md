@@ -1,4 +1,12 @@
-# RUSTFLAGS="-Zsanitizer=thread -C unsafe-allow-abi-mismatch=sanitizer" cargo +nightly test
+# sanitizer=thread
+
+Команда:
+
+```bash
+RUSTFLAGS="-Zsanitizer=thread -C unsafe-allow-abi-mismatch=sanitizer" cargo +nightly test
+```
+
+Вывод:
 
 ```log
 269 | where

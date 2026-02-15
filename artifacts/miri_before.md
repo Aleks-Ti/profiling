@@ -1,5 +1,13 @@
 # miri
 
+Команда:
+
+```bash
+cargo +nightly miri test
+```
+
+Вывод:
+
 ```log
 warning[E0133]: dereference of raw pointer is unsafe and requires unsafe block
   --> src/lib.rs:60:15
