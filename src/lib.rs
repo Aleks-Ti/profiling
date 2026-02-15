@@ -36,11 +36,21 @@ pub fn normalize(input: &str) -> String {
 /// Логическая ошибка: усредняет по всем элементам, хотя требуется учитывать
 /// только положительные. Деление на длину среза даёт неверный результат.
 pub fn average_positive(values: &[i64]) -> f64 {
-    let sum: i64 = values.iter().sum();
-    if values.is_empty() {
-        return 0.0;
+    let mut sum = 0i64;
+    let mut count = 0usize;
+
+    for &value in values {
+        if value > 0 {
+            sum += value;
+            count += 1;
+        }
     }
-    sum as f64 / values.len() as f64
+
+    if count == 0 {
+        0.0
+    } else {
+        sum as f64 / count as f64
+    }
 }
 
 /// Use-after-free: возвращает значение после освобождения бокса.
@@ -51,4 +61,37 @@ pub unsafe fn use_after_free() -> i32 {
     let val = *raw;
     drop(Box::from_raw(raw));
     val + *raw
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_average_positive_regression() {
+        // Основной случай: только положительные числа
+        assert_eq!(average_positive(&[1, 2, 3]), 2.0);
+
+        // Смешанные значения: отрицательные, ноль и положительные
+        assert_eq!(average_positive(&[-5, -2, 0, 4, 6]), 5.0); // (4 + 6) / 2 = 5.0
+
+        // Только неположительные — результат должен быть 0.0
+        assert_eq!(average_positive(&[-1, -2, 0]), 0.0);
+
+        // Пустой срез
+        assert_eq!(average_positive(&[]), 0.0);
+
+        // Один положительный элемент
+        assert_eq!(average_positive(&[42]), 42.0);
+
+        // Один отрицательный элемент
+        assert_eq!(average_positive(&[-42]), 0.0);
+
+        // Большие числа
+        assert_eq!(average_positive(&[1_000_000, 2_000_000]), 1_500_000.0);
+
+        // Убедимся, что НОЛЬ не учитывается как положительное число
+        assert_eq!(average_positive(&[0, 0, 0]), 0.0);
+        assert_eq!(average_positive(&[0, 1, 0]), 1.0); // только 1 учитывается
+    }
 }
